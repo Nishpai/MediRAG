@@ -1,0 +1,73 @@
+====================================================================
+              🏥 MediRAG - QUICK START 🏥
+====================================================================
+
+PROJECT LOCATION:
+C:\Users\nishp\OneDrive\Desktop\Projects\MediRAG
+
+====================================================================
+STEP 1: ADD YOUR OPENAI API KEY (ONE-TIME SETUP)
+====================================================================
+
+Open this file:
+  backend\.env
+
+Replace:
+  OPENAI_API_KEY=your-openai-api-key-here
+
+With your actual key from:
+  https://platform.openai.com/api-keys
+
+====================================================================
+STEP 2: START THE BACKEND SERVER
+====================================================================
+
+In PowerShell, run:
+  cd C:\Users\nishp\OneDrive\Desktop\Projects\MediRAG
+  .\start-backend.ps1
+
+Wait for: "Running on http://127.0.0.1:5000"
+Keep this terminal open!
+
+====================================================================
+STEP 3: START THE FRONTEND SERVER (NEW TERMINAL)
+====================================================================
+
+Open a NEW PowerShell window and run:
+  cd C:\Users\nishp\OneDrive\Desktop\Projects\MediRAG
+  .\start-frontend.ps1
+
+Browser opens automatically at http://localhost:3000
+
+====================================================================
+EXAMPLE QUESTIONS TO ASK
+====================================================================
+
+What are the symptoms of diabetes?
+How can I prevent heart disease?
+What is a healthy BMI range?
+What foods help lower cholesterol?
+
+====================================================================
+NEED HELP?
+====================================================================
+
+Read: START-HERE.md (detailed guide)
+Read: SETUP-COMPLETE.md (full documentation)
+Read: README.md (comprehensive docs)
+
+====================================================================
+PROJECT STATUS
+====================================================================
+
+✅ All dependencies installed
+✅ Backend ready (Flask + LangChain + FAISS)
+✅ Frontend ready (React + Tailwind CSS)
+✅ Medical database created (25+ topics)
+⚠️  NEEDS: Your OpenAI API key in backend\.env
+
+====================================================================
+
+You're all set! Just add your API key and run the start scripts.
+
+Created: October 15, 2025
