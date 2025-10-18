@@ -1,88 +1,9 @@
-COMPREHENSIVE MEDICAL FAQ DATABASE
+MEDICAL FAQ DATABASE (MedQuAD)
 ================================================================================
 
-=== ORIGINAL CURATED FAQS ===
-
-MEDICAL FAQ DATABASE
-====================
-
-Q: What are the common symptoms of diabetes?
-A: Common symptoms of diabetes include increased thirst and frequent urination, extreme hunger, unexplained weight loss, fatigue, irritability, blurred vision, slow-healing sores, and frequent infections. Type 1 diabetes symptoms often develop suddenly, while Type 2 diabetes symptoms develop more gradually and may be subtle at first. If you experience these symptoms, consult a healthcare provider for proper testing and diagnosis.
-
-Q: How can I prevent heart disease?
-A: Heart disease prevention involves several lifestyle modifications: maintain a healthy diet rich in fruits, vegetables, whole grains, and lean proteins; exercise regularly (at least 150 minutes of moderate aerobic activity per week); maintain a healthy weight; quit smoking and avoid secondhand smoke; limit alcohol consumption; manage stress through relaxation techniques; control blood pressure, cholesterol, and blood sugar levels; and get regular health screenings. Family history matters, so discuss your risk factors with your doctor.
-
-Q: What is hypertension and how is it managed?
-A: Hypertension, or high blood pressure, is a condition where blood pressure remains consistently elevated (140/90 mmHg or higher). It's often called the "silent killer" because it typically has no symptoms. Management includes: lifestyle changes like reducing sodium intake, eating a balanced diet (DASH diet), regular exercise, maintaining healthy weight, limiting alcohol, quitting smoking, and managing stress. Medications may be prescribed if lifestyle changes aren't sufficient. Regular monitoring is essential.
-
-Q: What are the symptoms of COVID-19?
-A: COVID-19 symptoms can range from mild to severe and typically appear 2-14 days after exposure. Common symptoms include fever or chills, cough, shortness of breath or difficulty breathing, fatigue, muscle or body aches, headache, loss of taste or smell, sore throat, congestion or runny nose, nausea, vomiting, and diarrhea. Severe symptoms requiring immediate medical attention include difficulty breathing, persistent chest pain, confusion, inability to wake or stay awake, and bluish lips or face.
-
-Q: How much sleep do adults need?
-A: Most adults need 7-9 hours of quality sleep per night for optimal health and functioning. Individual needs may vary slightly, but consistently getting less than 7 hours is associated with increased risk of chronic conditions like obesity, diabetes, cardiovascular disease, and mental health issues. Good sleep hygiene includes maintaining a consistent sleep schedule, creating a comfortable sleep environment, avoiding screens before bedtime, limiting caffeine and alcohol, and managing stress.
-
-Q: What is a healthy BMI range?
-A: Body Mass Index (BMI) is calculated as weight in kilograms divided by height in meters squared. For adults, a healthy BMI range is 18.5-24.9. Underweight is below 18.5, overweight is 25-29.9, and obese is 30 or above. However, BMI has limitations as it doesn't distinguish between muscle and fat mass or account for bone density and overall body composition. It should be used as a general screening tool, not a diagnostic measure.
-
-Q: What foods help lower cholesterol?
-A: Foods that help lower cholesterol include: oats, barley, and whole grains (high in soluble fiber); beans and legumes; nuts (especially almonds and walnuts); fatty fish rich in omega-3 fatty acids (salmon, mackerel, sardines); fruits like apples, grapes, strawberries, and citrus; vegetables, especially eggplant and okra; plant sterols and stanols (found in fortified foods); avocados; olive oil; and soy products. Reduce saturated fats, trans fats, and dietary cholesterol for best results.
-
-Q: What are the warning signs of a stroke?
-A: Remember the acronym FAST: Face drooping (one side of the face droops or is numb), Arm weakness (one arm is weak or numb), Speech difficulty (speech is slurred or hard to understand), Time to call emergency services immediately. Other symptoms include sudden numbness or weakness in the leg, sudden confusion, trouble seeing in one or both eyes, sudden trouble walking, dizziness, loss of balance or coordination, and sudden severe headache with no known cause. Every second counts in stroke treatment.
-
-Q: How can I boost my immune system naturally?
-A: Strengthen your immune system through: eating a balanced diet rich in fruits, vegetables, whole grains, and lean proteins; getting adequate sleep (7-9 hours for adults); exercising regularly (moderate intensity most days); managing stress through meditation, yoga, or other relaxation techniques; staying hydrated; maintaining a healthy weight; not smoking; limiting alcohol; practicing good hygiene; getting recommended vaccinations; and considering vitamin D supplementation if deficient. A healthy lifestyle is the best defense.
-
-Q: What is the difference between COVID-19 and the flu?
-A: COVID-19 and influenza are both contagious respiratory illnesses caused by different viruses. COVID-19 is caused by SARS-CoV-2, while flu is caused by influenza viruses. COVID-19 seems to spread more easily and can cause more serious illnesses in some people. It may take longer for symptoms to appear (2-14 days vs 1-4 days for flu). Loss of taste or smell is more common with COVID-19. Both can result in severe illness, but COVID-19 has shown higher rates of severe outcomes in certain populations.
-
-Q: What are the benefits of regular exercise?
-A: Regular physical activity provides numerous benefits: strengthens cardiovascular health and reduces heart disease risk; helps maintain healthy weight; strengthens bones and muscles; improves mental health and mood by reducing anxiety and depression; enhances cognitive function and memory; improves sleep quality; reduces risk of type 2 diabetes and metabolic syndrome; reduces risk of certain cancers; increases longevity; boosts immune function; and improves balance and coordination, reducing fall risk in older adults.
-
-Q: What is metabolic syndrome?
-A: Metabolic syndrome is a cluster of conditions that occur together, increasing risk of heart disease, stroke, and type 2 diabetes. It's diagnosed when you have three or more of these: increased waist circumference (abdominal obesity), elevated triglycerides, reduced HDL (good) cholesterol, elevated blood pressure, and elevated fasting blood sugar. Treatment focuses on lifestyle changes including weight loss, increased physical activity, and a heart-healthy diet. Medications may be needed for individual components.
-
-Q: How much water should I drink daily?
-A: General guidelines recommend about 11.5 cups (2.7 liters) of fluids daily for women and 15.5 cups (3.7 liters) for men from all beverages and foods. About 20% typically comes from food. Individual needs vary based on activity level, climate, health status, and pregnancy/breastfeeding status. Signs of adequate hydration include rarely feeling thirsty and having pale yellow urine. Drink more when exercising, in hot weather, or if ill with fever, vomiting, or diarrhea.
-
-Q: What causes migraine headaches?
-A: Migraines are complex neurological events involving changes in brain activity and blood flow. Common triggers include: hormonal changes in women, certain foods (aged cheeses, processed meats, alcohol), food additives (MSG, artificial sweeteners), stress, sensory stimuli (bright lights, loud sounds), sleep changes, intense physical exertion, weather changes, and certain medications. Genetics play a significant role. Treatment includes avoiding triggers, lifestyle modifications, over-the-counter or prescription medications, and preventive therapies for chronic migraines.
-
-Q: What is the DASH diet?
-A: The DASH (Dietary Approaches to Stop Hypertension) diet is designed to prevent and lower high blood pressure. It emphasizes: vegetables, fruits, whole grains, lean proteins (fish, poultry), low-fat dairy, nuts, seeds, and legumes. It limits: sodium (1,500-2,300 mg/day), saturated fats, red meat, sweets, and sugar-sweetened beverages. The diet is rich in potassium, calcium, magnesium, fiber, and protein. Studies show it effectively lowers blood pressure and improves heart health.
-
-Q: What are the symptoms of depression?
-A: Depression symptoms lasting two weeks or more include: persistent sad, anxious, or empty mood; loss of interest in activities once enjoyed; changes in appetite or weight; sleep disturbances (insomnia or oversleeping); fatigue and decreased energy; feelings of worthlessness or excessive guilt; difficulty concentrating or making decisions; restlessness or slowed movements; and thoughts of death or suicide. Depression is treatable through therapy, medication, lifestyle changes, or combinations. Seek professional help if experiencing these symptoms.
-
-Q: How can I improve my bone health?
-A: Maintain strong bones through: adequate calcium intake (1,000-1,200 mg daily for adults); vitamin D sufficiency (600-800 IU daily, more if deficient); regular weight-bearing exercise (walking, jogging, dancing, weightlifting); avoiding excessive alcohol; not smoking; maintaining healthy body weight; limiting caffeine; ensuring adequate protein intake; and preventing falls. Bone density peaks in the late 20s, making early prevention crucial. Regular bone density screening is recommended for women over 65 and men over 70.
-
-Q: What is prediabetes?
-A: Prediabetes is a condition where blood sugar levels are higher than normal but not high enough to be diagnosed as type 2 diabetes. Fasting glucose is 100-125 mg/dL or HbA1c is 5.7-6.4%. It significantly increases the risk of developing type 2 diabetes, heart disease, and stroke. However, progression to diabetes is not inevitable. Lifestyle changes including weight loss (5-7% of body weight), increased physical activity (150 minutes/week), and healthy eating can prevent or delay type 2 diabetes development.
-
-Q: What are probiotics and are they beneficial?
-A: Probiotics are live microorganisms (bacteria and yeasts) that provide health benefits when consumed in adequate amounts. They're found in fermented foods (yogurt, kefir, sauerkraut, kimchi, miso) and supplements. Benefits may include: improved digestive health, reduced symptoms of irritable bowel syndrome, enhanced immune function, potential mental health benefits, and improved absorption of nutrients. Specific strains have different effects. Most people can safely consume probiotic foods, but those with weakened immune systems should consult healthcare providers before taking supplements.
-
-Q: What causes high cholesterol?
-A: High cholesterol can result from: genetics (familial hypercholesterolemia); poor diet high in saturated fats, trans fats, and cholesterol; obesity and lack of physical activity; smoking; age (cholesterol rises with age); diabetes; kidney disease; hypothyroidism; and certain medications. LDL ("bad") cholesterol above 100 mg/dL and total cholesterol above 200 mg/dL are concerns. Management includes dietary changes, regular exercise, weight management, not smoking, limiting alcohol, and medications (statins) when lifestyle changes aren't sufficient.
-
-Q: What is acid reflux or GERD?
-A: Gastroesophageal reflux disease (GERD) occurs when stomach acid frequently flows back into the esophagus, causing irritation. Symptoms include heartburn, regurgitation of food or sour liquid, difficulty swallowing, chest pain, sensation of a lump in the throat, and chronic cough. Management includes: eating smaller meals, avoiding trigger foods (spicy, fatty, acidic foods, chocolate, caffeine, alcohol), not lying down within 3 hours of eating, elevating the head of the bed, maintaining healthy weight, and not smoking. Over-the-counter or prescription medications may be needed.
-
-Q: How often should I get a health checkup?
-A: Frequency depends on age, health status, and risk factors. Generally: annual physical exams are recommended; blood pressure checks at least every 2 years if normal; cholesterol screening every 4-6 years starting at age 20, more often if at risk; diabetes screening every 3 years starting at age 45; cancer screenings (mammogram, colonoscopy, pap smear) based on age and guidelines; bone density screening for women over 65; and eye and dental exams annually. Discuss personalized screening schedules with your healthcare provider based on your individual health profile.
-
-Q: What are the signs of dehydration?
-A: Dehydration symptoms include: thirst, dry mouth, dark yellow or amber urine, decreased urine output, fatigue, dizziness, confusion, headache, dry skin, rapid heartbeat, rapid breathing, and sunken eyes. Severe dehydration is a medical emergency with symptoms including extreme thirst, very dry mouth and skin, little or no urination, sunken eyes, rapid heartbeat and breathing, fever, unconsciousness, and irritability in infants/children. Prevent dehydration by drinking adequate fluids, especially in hot weather, during exercise, or when ill.
-
-Q: What is osteoporosis and who is at risk?
-A: Osteoporosis is a bone disease characterized by decreased bone density and strength, increasing fracture risk. Risk factors include: being female, advanced age, family history, small body frame, menopause, low calcium/vitamin D intake, sedentary lifestyle, smoking, excessive alcohol, long-term corticosteroid use, and certain medical conditions (rheumatoid arthritis, celiac disease). Prevention includes adequate calcium and vitamin D, weight-bearing exercise, avoiding smoking and excessive alcohol, and bone density testing. Treatment may include medications to slow bone loss or promote bone building.
-
-Q: What are healthy ways to manage stress?
-A: Effective stress management techniques include: regular physical exercise; practicing mindfulness meditation or deep breathing exercises; maintaining social connections and talking to friends/family; getting adequate sleep (7-9 hours); eating a balanced, nutritious diet; limiting caffeine and alcohol; engaging in hobbies and activities you enjoy; setting realistic goals and priorities; learning to say no; taking breaks and practicing relaxation; journaling; and seeking professional help when needed. Chronic stress negatively impacts physical and mental health, so developing healthy coping strategies is essential.
-
-
-=== MEDQUAD MEDICAL Q&A DATABASE ===
+Source: MedQuAD - Medical Question Answering Dataset
+Total Q&A Pairs: 14809
+================================================================================
 
 Q: What is (are) Adult Acute Lymphoblastic Leukemia ?
 A: Key Points
