@@ -1,487 +1,152 @@
-# 🏥 MediRAG - AI-Powered Medical FAQ Bot
+# MediRAG
 
-<div align="center">
+Ask a health question in plain words and get the closest passages from MedlinePlus, with the source link for each one. General information only, not medical advice.
 
-![MediRAG Banner](https://img.shields.io/badge/MediRAG-Medical%20AI%20Assistant-blue?style=for-the-badge&logo=医疗)
+![Streamlit app](images/app.png)
 
-A modern, polished **AI-Powered Medical FAQ Bot** built with **Retrieval-Augmented Generation (RAG)** architecture. Get reliable, context-aware answers to medical questions through an elegant chat interface.
+Voice input example (see the voice section for what went wrong here). This screenshot is from the first version with the smaller model, so its scores differ slightly:
 
-[![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=flat&logo=react&logoColor=white)](https://reactjs.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.0.0-000000?style=flat&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
-[![LangChain](https://img.shields.io/badge/LangChain-Latest-00ADD8?style=flat)](https://www.langchain.com/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-API-412991?style=flat&logo=openai&logoColor=white)](https://openai.com/)
-[![FAISS](https://img.shields.io/badge/FAISS-Vector%20Store-4285F4?style=flat)](https://github.com/facebookresearch/faiss)
+![Voice input](images/voice.png)
 
-</div>
+## Results
 
----
+Measured on the test split of `eval/questions.csv`: 111 hand-written medical questions and 18 non-medical ones. A question counts as a hit when the expected MedlinePlus topic is in the top results. Run `python eval/evaluate.py` to reproduce.
 
-## 🌟 Features
+| Method | hit@1 | hit@3 | MRR |
+|---|---|---|---|
+| TF-IDF baseline | 0.342 (38/111) | 0.550 (61/111) | 0.477 |
+| Embeddings, first version (all-MiniLM-L6-v2) | 0.532 (59/111) | 0.775 (86/111) | 0.678 |
+| Embeddings, current (all-mpnet-base-v2) | 0.586 (65/111) | 0.838 (93/111) | 0.722 |
 
-### 🎨 **Modern UI/UX**
-- 🎯 Clean, medical-themed interface with soft blue/white palette
-- 💬 ChatGPT-style conversation layout with smooth animations
-- 📱 Fully responsive design (desktop & mobile)
-- ⚡ Real-time typing indicators and message animations
-- 🔍 Expandable source citations for transparency
+Not-found check: if the best similarity is below **0.512**, the app says "I could not find this". The threshold was picked on a separate dev split (32 medical, 14 non-medical questions), not on the test questions. On the test split it rejected **18 of 18** non-medical questions but wrongly rejected **12 of 111** medical ones. With the first model the same rule gave 16 of 18 and 4 of 111, so the new model is better at finding the right topic and stricter, but it says "not found" to more real questions.
 
-### 🧠 **Intelligent RAG Pipeline**
-- 🔎 Semantic search using OpenAI embeddings (`text-embedding-3-small`)
-- 📚 FAISS vector store for lightning-fast retrieval
-- 🤖 GPT-3.5-turbo powered responses with context awareness
-- 💾 LRU caching for 30% faster repeated queries
-- 📊 Confidence scoring and source attribution
+The not-found rule is the weak part. Non-medical questions close to health topics are hard to separate:
 
-### 🛡️ **Production-Ready**
-- 🔒 Input sanitization and validation
-- 🚨 Comprehensive error handling
-- 📝 Request/response logging
-- ⏱️ Performance monitoring (latency tracking)
-- 🔄 CORS-enabled REST API
+- On dev, "how long does it take to get pregnant" scored only 0.37, below several non-medical dev questions (the highest was 0.50). No threshold gets every dev question right.
+- On test, the closest non-medical questions were "how do I bathe my parrot" (0.49) and "what is the best workout playlist for the gym" (0.46), just under the threshold.
+- Wrongly rejected medical questions include "I keep checking the door lock again and again" (0.36), "what is a normal pulse rate" (0.42), "what are the chances of getting pregnant on the pill" (0.43), "a bee stung me and my face is swelling" (0.46) and "my head pounds on one side and light makes it worse" (0.49).
 
----
+An earlier, smaller version of the set (42 test questions, only clearly non-medical out-of-scope questions) gave hit@1 0.476 and 10 of 10 rejected. Adding near-medical questions like fitness and pet care made the not-found result worse, and the bigger set is the more honest one.
 
-## 🏗️ Architecture
+### What I tried
 
-```
-┌─────────────────┐      ┌──────────────────┐      ┌─────────────────┐
-│  React Frontend │─────▶│  Flask Backend   │─────▶│  OpenAI API     │
-│  (Tailwind CSS) │      │  (RAG Pipeline)  │      │  (GPT-3.5)      │
-└─────────────────┘      └──────────────────┘      └─────────────────┘
-                                  │
-                                  ▼
-                         ┌──────────────────┐
-                         │  FAISS Vector DB │
-                         │  (Embeddings)    │
-                         └──────────────────┘
-```
+I compared these on the **dev split only** (32 medical questions), then ran the test split once for the chosen setup. With 32 questions, one question is about 3 points, so small differences mean little.
 
-### **Tech Stack**
+| Setup (dev) | hit@1 | hit@3 | MRR |
+|---|---|---|---|
+| TF-IDF | 0.344 | 0.562 | 0.468 |
+| all-MiniLM-L6-v2 (first version) | 0.500 | 0.812 | 0.661 |
+| BAAI/bge-small-en-v1.5 with its query prefix | 0.500 | 0.844 | 0.662 |
+| intfloat/e5-small-v2 with query/passage prefixes | 0.500 | 0.781 | 0.656 |
+| **all-mpnet-base-v2 (kept)** | **0.562** | **0.906** | **0.714** |
+| MiniLM, topic score = mean of its best 2 chunks | 0.500 | 0.812 | 0.664 |
+| MiniLM + 0.2 x TF-IDF score | 0.562 | 0.812 | 0.705 |
+| mpnet + 0.2 x TF-IDF score | 0.625 | 0.875 | 0.762 |
+| MiniLM top 10 reranked by cross-encoder/ms-marco-MiniLM-L-6-v2 | 0.500 | 0.781 | 0.673 |
 
-| Layer | Technology |
-|-------|------------|
-| **Frontend** | React 18, Tailwind CSS, Axios, Vite |
-| **Backend** | Flask 3.0, Python 3.10+ |
-| **AI/ML** | LangChain, OpenAI API (GPT-3.5, Embeddings) |
-| **Vector Store** | FAISS (Facebook AI Similarity Search) |
-| **Data** | Curated medical FAQs (25+ topics) |
+- I kept all-mpnet-base-v2. It was best or tied on all three dev numbers and separated dev medical and non-medical questions best (45 of 46 right at the best cut). The cost is size: about 420 MB instead of 90 MB, and building the index takes about 2.5 minutes on CPU instead of 25 seconds.
+- Mixing in TF-IDF helped MiniLM and mpnet on dev but hurt bge and e5, and the best weight changed between 0.1 and 0.2. With so few dev questions I did not trust it, so I left it out to keep one simple score.
+- Averaging a topic's best 2 chunks and the cross-encoder reranker did not help on dev, so I dropped them.
+- Putting the topic title and "also called" names in front of each chunk was already done in the first version, so it is not a new change.
 
----
+![Results chart](images/results.png)
 
-## 📦 Project Structure
+These numbers are for **retrieval only**. The optional generated answer and the voice input are not part of them.
 
-```
-MediRAG/
-├── backend/
-│   ├── main.py                 # Flask server & API endpoints
-│   ├── rag_pipeline.py         # RAG logic (embedding, retrieval, QA)
-│   ├── requirements.txt        # Python dependencies
-│   ├── test_query.py           # API testing script
-│   ├── .env.example            # Environment variables template
-│   ├── data/
-│   │   └── medical_faqs.txt    # Medical Q&A knowledge base
-│   └── vectorstore/            # FAISS index (auto-generated)
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── ChatWindow.jsx      # Message display container
-│   │   │   ├── MessageBubble.jsx   # Individual message UI
-│   │   │   └── InputBar.jsx        # User input component
-│   │   ├── App.jsx                 # Root component
-│   │   ├── api.js                  # Backend API client
-│   │   ├── index.css               # Global styles + Tailwind
-│   │   └── main.jsx                # React entry point
-│   ├── index.html
-│   ├── package.json
-│   ├── vite.config.js
-│   ├── tailwind.config.js
-│   └── .env.example
-│
-├── .gitignore
-└── README.md
-```
+### What the misses look like
 
----
+Most top-1 misses land on a closely related topic, for example:
 
-## 🚀 Quick Start
+- "crushing chest pain spreading to my left arm" gave "Chest Pain" first and "Heart Attack" second.
+- "what are early signs of losing memory in older people" gave "Dementia" before "Alzheimer's Disease".
+- "what are the warning signs of a seizure" gave "Seizures" before "Epilepsy".
+- "I have an itchy discharge down there with a yeast smell" gave "Vaginitis", which is a fair answer, but not the topic I wrote down.
 
-### Prerequisites
+Some are real failures that never reached the top 3, for example "I get wheezy and short of breath when I exercise" (Asthma), "I cough up mucus every morning as a smoker" (COPD), "I feel hopeless and lost interest in everything for weeks" (Depression), "I keep checking the door lock again and again" (Obsessive-Compulsive Disorder) and "my immune system attacks my organs and I have a butterfly rash" (Lupus). Everyday wording for mental health is still weak. The full list is printed by the eval script.
 
-- **Node.js** 18+ and npm
-- **Python** 3.10+
-- **OpenAI API Key** ([Get one here](https://platform.openai.com/api-keys))
+## How it works
 
----
+1. `build_index.py` downloads the latest MedlinePlus health topics XML (US National Library of Medicine, public domain) into `data/`. It keeps the 1,017 English topics, cleans the HTML summaries and splits them into 3,801 chunks of up to about 120 words. Each chunk starts with its topic title and keeps the topic URL.
+2. It embeds every chunk with `all-mpnet-base-v2` (768 numbers per chunk) and saves them as a numpy array. No vector database, a 3,801 x 768 matrix is small enough for plain numpy. The model name is set once, in `rag.py`.
+3. `rag.py` embeds the question, takes the dot product with all chunk vectors (cosine similarity, since vectors are normalized) and returns the best chunk from each of the top 3 topics.
+4. If the best score is under the threshold in `threshold.json`, it says not found instead of showing weak matches.
+5. Optional: if `OPENAI_API_KEY` is set, it asks an LLM to answer using only the retrieved passages, or reply "not found". Without a key the app works fully and only shows passages.
 
-### 🔧 Backend Setup
+## Run it
 
-1. **Navigate to backend directory:**
-   ```powershell
-   cd backend
-   ```
+Python 3.10 or newer. The first run downloads about 30 MB of MedlinePlus data and the embedding model (about 420 MB). Building the index took about 2.5 minutes on an 8 core CPU.
 
-2. **Create virtual environment:**
-   ```powershell
-   python -m venv venv
-   .\venv\Scripts\activate
-   ```
-
-3. **Install dependencies:**
-   ```powershell
-   pip install -r requirements.txt
-   ```
-
-4. **Configure environment variables:**
-   ```powershell
-   copy .env.example .env
-   ```
-   
-   Edit `.env` and add your OpenAI API key:
-   ```
-   OPENAI_API_KEY=sk-your-actual-key-here
-   ```
-
-5. **Start the Flask server:**
-   ```powershell
-   python main.py
-   ```
-
-   The server will:
-   - ✅ Load medical FAQ data
-   - ✅ Build FAISS vector store (first run only)
-   - ✅ Start on `http://localhost:5000`
-
----
-
-### 🎨 Frontend Setup
-
-1. **Open new terminal and navigate to frontend:**
-   ```powershell
-   cd frontend
-   ```
-
-2. **Install dependencies:**
-   ```powershell
-   npm install
-   ```
-
-3. **Configure environment variables:**
-   ```powershell
-   copy .env.example .env
-   ```
-
-4. **Start development server:**
-   ```powershell
-   npm run dev
-   ```
-
-   Opens automatically at `http://localhost:3000`
-
----
-
-## 🧪 Testing
-
-### Test Backend API
-
-```powershell
-cd backend
-python test_query.py
-```
-
-**Test Coverage:**
-- ✅ Health check endpoint
-- ✅ Multiple diverse queries
-- ✅ Caching verification
-- ✅ Edge cases (empty/long queries)
-- ✅ Error handling
-
-### Manual Testing
-
-**Health Check:**
-```powershell
-curl http://localhost:5000/
-```
-
-**Ask Question:**
-```powershell
-curl -X POST http://localhost:5000/ask `
-  -H "Content-Type: application/json" `
-  -d '{\"query\": \"What are the symptoms of diabetes?\"}'
-```
-
----
-
-## 📖 API Reference
-
-### `GET /`
-**Health check endpoint**
-
-**Response:**
-```json
-{
-  "status": "running",
-  "message": "Medical FAQ Bot API is operational",
-  "stats": {
-    "vectorstore_exists": true,
-    "cache_size": 5,
-    "document_count": 42
-  }
-}
-```
-
----
-
-### `POST /ask`
-**Ask a medical question**
-
-**Request:**
-```json
-{
-  "query": "What are the symptoms of diabetes?"
-}
-```
-
-**Response:**
-```json
-{
-  "answer": "Common symptoms of diabetes include increased thirst...",
-  "sources": [
-    {
-      "id": 1,
-      "content": "Q: What are the common symptoms of diabetes?...",
-      "full_content": "..."
-    }
-  ],
-  "confidence": 0.92,
-  "latency": 1.23,
-  "cached": false
-}
-```
-
----
-
-### `POST /build_index`
-**Rebuild vector store index**
-
-Useful when updating `medical_faqs.txt` with new content.
-
-**Response:**
-```json
-{
-  "message": "Vector store rebuilt successfully",
-  "stats": { ... }
-}
-```
-
----
-
-### `GET /stats`
-**Get pipeline statistics**
-
-**Response:**
-```json
-{
-  "vectorstore_exists": true,
-  "cache_size": 12,
-  "document_count": 42,
-  "data_path": "/path/to/medical_faqs.txt"
-}
-```
-
----
-
-## 🎯 Usage Examples
-
-### Example Queries
+Windows PowerShell:
 
 ```
-✅ "What are the symptoms of diabetes?"
-✅ "How can I prevent heart disease?"
-✅ "What is a healthy BMI range?"
-✅ "What foods help lower cholesterol?"
-✅ "What are the warning signs of a stroke?"
-✅ "How much sleep do adults need?"
-✅ "What is the DASH diet?"
-✅ "How can I boost my immune system naturally?"
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python build_index.py
+python eval/evaluate.py
+python ask.py "what can I do about a migraine"
+streamlit run app.py
+python -m pytest
 ```
 
-### Chat Features
+Linux or macOS:
 
-- 💬 **Natural Conversation:** Ask follow-up questions
-- 📚 **View Sources:** Click "Show Sources" to see retrieved context
-- 🔄 **Clear Chat:** Reset conversation anytime
-- ⚡ **Fast Responses:** Cached queries return in ~0.2s
-- 📊 **Transparency:** See confidence scores and latency
-
----
-
-## ⚙️ Configuration
-
-### Backend Configuration
-
-Edit `backend/main.py` to customize:
-
-```python
-# Server settings
-app.run(host='0.0.0.0', port=5000, debug=True)
-
-# Retrieval settings (rag_pipeline.py)
-search_kwargs={"k": 3}  # Number of documents to retrieve
-
-# LLM settings
-ChatOpenAI(model="gpt-3.5-turbo", temperature=0.3)
-
-# Cache size
-if len(self.query_cache) >= 100:  # Max 100 cached queries
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python build_index.py
+python eval/evaluate.py
+python ask.py "what can I do about a migraine"
+streamlit run app.py
+python -m pytest
 ```
 
-### Frontend Configuration
+On Linux, `pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu` first avoids downloading the much bigger GPU build.
 
-Edit `frontend/src/api.js`:
+Optional generated answers: `pip install openai`, then set `OPENAI_API_KEY` in your shell (never in the code). This part was not tested in the results above.
 
-```javascript
-// API timeout
-timeout: 30000  // 30 seconds
+## Voice input (optional)
 
-// API base URL
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+You can also ask by voice. The app records with Streamlit's `st.audio_input` and `voice.py` turns the audio into text with [faster-whisper](https://github.com/SYSTRAN/faster-whisper) using the `base.en` Whisper model. It runs on your computer, so no API key is needed and no audio leaves the machine. The transcript goes into the question box, where you can fix it before it is searched.
+
+```
+pip install -r requirements-voice.txt
+streamlit run app.py
 ```
 
----
+The first time you record, it downloads the model, about 141 MB. Without these packages the app still works with typed questions and shows a short note.
 
-## 📊 Performance Metrics
+What I tested, and only this:
 
-| Metric | Value |
-|--------|-------|
-| **Average Query Latency** | 1.5 - 3.0s (uncached) |
-| **Cached Query Latency** | 0.1 - 0.3s |
-| **Vector Store Build Time** | 10 - 20s (one-time) |
-| **Document Retrieval** | Top 3 most relevant |
-| **Embedding Model** | text-embedding-3-small (1536 dims) |
-| **Cache Hit Rate** | ~40% for common queries |
+- A clip made with espeak-ng (a robotic text to speech voice) saying "I have a painful red swollen big toe at night" was transcribed exactly, and "Gout" was in the results. This clip is in `tests/audio/` and used by `tests/test_voice.py`.
+- In the browser, a second espeak-ng clip "my gums bleed when I brush my teeth" was heard as "My gums lead where I brush my teeth". "Gum Disease" was still first, but "Lead Poisoning" came second because of the wrong word (screenshot above). The browser's test microphone also played the clip twice, so the transcript has it twice.
 
----
+I have not tested real voices, accents (including Indian English) or how well it handles medical terms. `base.en` is a small model and will get some words wrong. Read the transcript before trusting the results.
 
-## 🔒 Security Best Practices
+`av` is pinned to 16.1.0 in `requirements-voice.txt` because faster-whisper 1.2.1 failed with the newest `av` (19.0.2).
 
-1. **API Keys:** Never commit `.env` files to version control
-2. **Input Validation:** All user inputs are sanitized (max 500 chars)
-3. **CORS:** Configure allowed origins in production
-4. **Rate Limiting:** Consider adding Flask-Limiter for production
-5. **HTTPS:** Use reverse proxy (nginx) with SSL in production
+## Files
 
----
+- `build_index.py` download, parse, chunk and embed
+- `rag.py` search, not-found check and optional generation
+- `ask.py` command line
+- `app.py` Streamlit demo
+- `voice.py` optional local speech to text
+- `.streamlit/config.toml` turns off Streamlit's file watcher, which printed noisy errors about torchvision
+- `eval/questions.csv` and `eval/evaluate.py` evaluation, writes `threshold.json`, `eval/results.json` and `images/results.png`
+- `tests/` 9 pytest tests, run offline in a few seconds once the index is built. The voice test is skipped if faster-whisper is not installed, and needs the Whisper model downloaded once.
 
-## 🐛 Troubleshooting
+## Limitations
 
-### Backend Issues
+- Not medical advice. It only repeats MedlinePlus text and can show the wrong topic.
+- The question set is still small (111 medical and 18 non-medical test questions) and written by me, so the numbers have wide error bars and reflect how I phrase questions.
+- Hit is checked against one expected topic, so a sensible related topic still counts as a miss.
+- The not-found threshold is from 46 dev questions. With the current model it wrongly rejects about 1 in 9 medical test questions. Near-medical questions about fitness or pets come close to it.
+- The embedding model is about 420 MB, which makes the first setup slower.
+- Voice input was only tested on two synthetic clips.
+- English only, and only the topic summaries, not the linked articles.
+- MedlinePlus updates the XML often. These results used the 2026-10-24 file, so a newer download can change the numbers slightly.
+- The optional LLM answer is not evaluated and can still be wrong.
 
-**"OPENAI_API_KEY not found"**
-- ✅ Ensure `.env` file exists in `backend/` directory
-- ✅ Check API key is valid and has credits
-
-**"Vector store not found"**
-- ✅ First run builds index automatically (takes ~20s)
-- ✅ Check `backend/vectorstore/` directory is created
-- ✅ Run `POST /build_index` to rebuild manually
-
-**Import errors:**
-```powershell
-pip install --upgrade -r requirements.txt
-```
-
-### Frontend Issues
-
-**"Unable to connect to server"**
-- ✅ Ensure Flask backend is running on port 5000
-- ✅ Check CORS is enabled in `main.py`
-- ✅ Verify `.env` has correct `VITE_API_URL`
-
-**Build errors:**
-```powershell
-rm -rf node_modules package-lock.json
-npm install
-```
-
----
-
-## 🚀 Future Enhancements
-
-### Planned Features
-
-- [ ] 🎤 **Voice Input** - Web Speech API integration
-- [ ] 👍👎 **User Feedback** - Collect ratings for fine-tuning
-- [ ] 🌍 **Multi-language** - Translation API support
-- [ ] 📈 **Admin Dashboard** - Upload new FAQs, view analytics
-- [ ] 🔐 **User Authentication** - Save chat history
-- [ ] 📄 **PDF/CSV Upload** - Dynamic knowledge base expansion
-- [ ] 🎨 **Dark Mode** - Theme toggle
-- [ ] 📊 **Advanced Analytics** - Query patterns, popular topics
-- [ ] 🔍 **Semantic Filter** - Domain-specific query validation
-- [ ] ⚡ **Streaming Responses** - Real-time token streaming
-
----
-
-## 📚 Tech Documentation
-
-### Key Dependencies
-
-**Backend:**
-- [Flask](https://flask.palletsprojects.com/) - Web framework
-- [LangChain](https://python.langchain.com/) - LLM orchestration
-- [FAISS](https://github.com/facebookresearch/faiss) - Vector similarity search
-- [OpenAI Python SDK](https://github.com/openai/openai-python) - API client
-
-**Frontend:**
-- [React](https://react.dev/) - UI library
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
-- [Vite](https://vitejs.dev/) - Build tool
-- [Axios](https://axios-http.com/) - HTTP client
-
----
-
-## 🤝 Contributing
-
-Contributions welcome! Please:
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-## ⚠️ Medical Disclaimer
-
-**This chatbot provides general health information only and is NOT a substitute for professional medical advice, diagnosis, or treatment.**
-
-Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read from this chatbot.
-
-If you think you may have a medical emergency, call your doctor or emergency services immediately.
-
----
-
-## 📧 Contact & Support
-
-- **Issues:** [GitHub Issues](https://github.com/yourusername/medirag/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/yourusername/medirag/discussions)
-
----
-
-<div align="center">
-
-**Built with ❤️ using React, Flask, LangChain & OpenAI**
-
-⭐ Star this repo if you found it helpful!
-
-</div>
-#   M e d i R A G  
- 
+Data: [MedlinePlus Health Topics XML](https://medlineplus.gov/xml.html), U.S. National Library of Medicine.

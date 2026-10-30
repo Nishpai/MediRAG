@@ -1,0 +1,176 @@
+split,question,expected_topic
+dev,my blood sugar test came back a bit high but not diabetic yet what does that mean,Prediabetes
+dev,why do my joints feel stiff and swollen every morning,Rheumatoid Arthritis
+dev,what can I do about frequent heartburn after dinner,GERD
+dev,my child has red itchy spots all over and a fever after being near a sick kid,Chickenpox
+dev,how do I know if a mole is turning into skin cancer,Melanoma
+dev,is it normal to feel sad for weeks after giving birth,Postpartum Depression
+dev,what causes ringing in my ears that won't go away,Tinnitus
+dev,how can I lower my cholesterol,Cholesterol
+dev,why does my lower back hurt after lifting boxes,Back Pain
+dev,what are the signs that someone is having a stroke,Stroke
+dev,I keep waking up at night and can't fall back asleep,Insomnia
+dev,my kid wets the bed at age seven is that a problem,Urinary Incontinence
+dev,what is the world cup final score,OUT
+dev,how do I reverse a linked list in python,OUT
+dev,best budget smartphone in 2026,OUT
+dev,how to bake sourdough bread at home,OUT
+dev,what is the capital of australia,OUT
+dev,how do I fix a flat bicycle tyre,OUT
+test,why am I always thirsty and peeing a lot,Diabetes
+test,my head pounds on one side and light makes it worse,Migraine
+test,what happens if my blood pressure stays too high,High Blood Pressure
+test,I get wheezy and short of breath when I exercise,Asthma
+test,how is a broken arm treated,Fractures
+test,what are early signs of losing memory in older people,Alzheimer's Disease
+test,my toddler has a runny nose and sneezing every few weeks,Common Cold
+test,how do I know if I have the flu or just a cold,Flu
+test,burning feeling when I pee and need to go often,Urinary Tract Infections
+test,what foods should I avoid if I can't digest milk,Lactose Intolerance
+test,my thyroid is underactive what does that do to my body,Hypothyroidism
+test,how much exercise should an adult get each week,Exercise and Physical Fitness
+test,what is a healthy way to lose weight,Weight Control
+test,I feel worried and on edge all the time,Anxiety
+test,why do I feel tired and pale with low iron,Anemia
+test,how can I quit cigarettes,Quitting Smoking
+test,sharp pain in my lower right belly with nausea,Appendicitis
+test,how do bones get weak and break easily in older women,Osteoporosis
+test,what should I do after a dog bite,Animal Bites
+test,red itchy patches of dry skin on my elbows that keep coming back,Eczema
+test,how is HIV passed from one person to another,HIV
+test,what vaccines does my baby need,Childhood Vaccines
+test,my eyes are red and sticky in the morning,Eye Infections
+test,how can I tell if I am dehydrated,Dehydration
+test,I have a hard painful lump near my anus when I poop,Hemorrhoids
+test,how do I treat a minor burn from the stove,Burns
+test,what is a normal pregnancy diet,Pregnancy and Nutrition
+test,why do my feet tingle and go numb if I have diabetes,Diabetic Nerve Problems
+test,crushing chest pain spreading to my left arm,Heart Attack
+test,my periods are very painful every month,Period Pain
+test,what are kidney stones and why do they hurt so much,Kidney Stones
+test,can I get sick from eating undercooked chicken,Foodborne Illness
+test,how much sleep do teenagers need,Healthy Sleep
+test,my knees ache and creak as I get older,Osteoarthritis
+test,what does a high fever in a baby mean,Fever
+test,how can I protect myself from sunburn,Sun Exposure
+test,I sneeze and my eyes itch every spring,Hay Fever
+test,what is the treatment for a stomach ulcer,Peptic Ulcer
+test,how do I know if I have a concussion after hitting my head,Concussion
+test,I feel dizzy and the room spins when I stand up,Dizziness and Vertigo
+test,what are the risks of drinking too much alcohol,Alcohol
+test,a bee stung me and my face is swelling,Insect Bites and Stings
+test,who won the cricket match yesterday,OUT
+test,how do I install python on windows,OUT
+test,recommend a good movie for tonight,OUT
+test,what is the price of bitcoin today,OUT
+test,how to write a cover letter for a job,OUT
+test,what time does the train to mumbai leave,OUT
+test,explain the rules of chess,OUT
+test,how do I change my car oil,OUT
+test,what is a good name for a cat,OUT
+test,how many planets are in the solar system,OUT
+dev,my gums bleed every time I brush,Gum Disease
+dev,how do I know if my child has lice,Head Lice
+dev,I have a painful red swollen big toe joint at night,Gout
+dev,why do I keep getting nosebleeds,Nose Injuries and Disorders
+dev,what does it mean if my skin and eyes turn yellow,Jaundice
+dev,my ankle twisted while running and is swollen,Sprains and Strains
+dev,how can I stop snoring at night,Snoring
+dev,what should I do if someone is choking,Choking
+dev,my hands shake and I move slowly as I get older,Parkinson's Disease
+dev,I have white patches inside my mouth,Mouth Disorders
+dev,what is the best way to brush and floss,Dental Health
+dev,why does my face break out with pimples,Acne
+dev,how do I care for a cut so it does not get infected,Wounds and Injuries
+dev,what happens to my body during menopause,Menopause
+dev,how long does it take to get pregnant,Infertility
+dev,I feel a lump in my breast what should I do,Breast Cancer
+dev,how is pink eye spread in kids,Pink Eye
+dev,what is a heart murmur,Heart Diseases
+dev,my baby has a lot of spit up after feeding,Infant and Newborn Nutrition
+dev,how do I prevent getting a blood clot on a long flight,Blood Clots
+dev,how many push ups should I do to build muscle,OUT
+dev,what is a good recipe for chicken curry,OUT
+dev,how often should I feed my puppy,OUT
+dev,what time does the pharmacy near me close,OUT
+dev,how do I improve my running speed for a marathon,OUT
+dev,what is the best protein powder flavour,OUT
+dev,how do I get my cat to stop scratching the sofa,OUT
+dev,how do I clean a cast iron pan,OUT
+test,I get a burning pain in my stomach when I am hungry,Peptic Ulcer
+test,why do I pass gas so much after eating beans,Gas
+test,I have not had a bowel movement in five days,Constipation
+test,I keep having loose watery stools,Diarrhea
+test,what makes my skin so itchy with raised red welts,Hives
+test,my scalp is flaky and itchy,"Dandruff, Cradle Cap, and Other Scalp Conditions"
+test,I have a thick yellow toenail that is cracking,Nail Diseases
+test,why is my hair falling out in clumps,Hair Loss
+test,I get pain in my heel when I take my first steps in the morning,Foot Health
+test,my wrist and fingers tingle when I type all day,Carpal Tunnel Syndrome
+test,pain shoots down the back of my leg from my lower back,Sciatica
+test,my neck is stiff after sleeping wrong,Neck Injuries and Disorders
+test,how do I know if my shoulder is dislocated,Dislocated Shoulder
+test,what are the warning signs of a seizure,Epilepsy
+test,my face suddenly drooped on one side and I can't close my eye,Bell's Palsy
+test,my vision is getting cloudy like looking through a foggy window,Cataract
+test,I can't see things far away clearly,Refractive Errors
+test,the pressure in my eye is high and I may lose side vision,Glaucoma
+test,my ear hurts and my child keeps pulling at it,Ear Infections
+test,I have trouble hearing people in noisy rooms,Hearing Disorders and Deafness
+test,my throat is sore and it hurts to swallow,Sore Throat
+test,my nose is blocked and my face hurts around my eyes,Sinusitis
+test,I cough up mucus every morning as a smoker,COPD
+test,can a cough that lasts for weeks be serious,Cough
+test,I had a chest x ray that showed a spot on my lung,Lung Cancer
+test,how is TB spread and treated,Tuberculosis
+test,my heart sometimes races or skips a beat,Arrhythmia
+test,my legs swell and I get breathless lying flat,Heart Failure
+test,I have bulging blue veins on my legs,Varicose Veins
+test,my legs hurt when I walk and feel better when I rest,Peripheral Arterial Disease
+test,what is a normal pulse rate,Vital Signs
+test,I get a pounding headache after skipping coffee,Caffeine
+test,my kidneys are not working well what diet should I follow,Chronic Kidney Disease
+test,I leak urine when I laugh or sneeze,Urinary Incontinence
+test,why does a man need to pee so often at night as he ages,Enlarged Prostate (BPH)
+test,what is a pap test for,Cervical Cancer Screening
+test,I have an itchy discharge down there with a yeast smell,Vaginal Diseases
+test,what are the chances of getting pregnant on the pill,Birth Control
+test,how can I tell if I have a sexually transmitted infection,Sexually Transmitted Infections
+test,I have a cold sore on my lip,Cold Sores
+test,my child has a high fever and a rash after measles exposure,Measles
+test,what is mono the kissing disease,Infectious Mononucleosis
+test,a tick bit me while hiking what should I watch for,Lyme Disease
+test,how do mosquitoes spread dengue,Dengue
+test,I traveled and now have fever and chills that come and go,Malaria
+test,what shots do I need before traveling abroad,Traveler's Health
+test,how do I wash my hands properly,Germs and Hygiene
+test,I feel hopeless and lost interest in everything for weeks,Depression
+test,my mood swings from very high energy to very low,Bipolar Disorder
+test,I keep checking the door lock again and again,Obsessive-Compulsive Disorder
+test,my teenager is making herself throw up after meals,Eating Disorders
+test,how can I tell if my child has ADHD,Attention Deficit Hyperactivity Disorder
+test,my son does not make eye contact and repeats words,Autism Spectrum Disorder
+test,I feel I can't stop drinking even when I want to,Alcohol Use Disorder (AUD)
+test,how do I safely get rid of old medicines,Medicines
+test,what are the signs of an opioid overdose,Opioid Overdose
+test,my body hurts all over and I am always tired,Fibromyalgia
+test,I get red scaly patches on my scalp and knees,Psoriasis
+test,my fingers turn white and numb in the cold,Raynaud Phenomenon
+test,my immune system attacks my organs and I have a butterfly rash,Lupus
+test,I have too much thyroid hormone and lose weight fast,Hyperthyroidism
+test,my blood sugar drops and I feel shaky and sweaty,Hypoglycemia
+test,what should my child eat for strong growth,Child Nutrition
+test,how much salt is too much,Sodium
+test,I want to eat less sugar,Carbohydrates
+test,how often should I get a colonoscopy,Colorectal Cancer
+test,my wound is red hot and full of pus,Skin Infections
+test,how can I prevent falls in my elderly parents,Falls
+test,what is first aid for heat stroke,Heat Illness
+test,what is the best workout playlist for the gym,OUT
+test,how do I make my sourdough rise more,OUT
+test,how do I teach my dog to sit,OUT
+test,is the chemist open on sunday,OUT
+test,what is the weight of a cricket bat,OUT
+test,what is the best yoga mat brand,OUT
+test,how do I bathe my parrot,OUT
+test,what is the cheapest gym membership in bangalore,OUT

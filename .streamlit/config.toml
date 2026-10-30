@@ -1,0 +1,3 @@
+[server]
+# The file watcher scans every installed module and prints noisy torchvision errors
+fileWatcherType = "none"
