@@ -80,14 +80,17 @@ Windows PowerShell:
 
 ```
 python -m venv .venv
+Set-ExecutionPolicy -Scope Process RemoteSigned
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 python build_index.py
 python eval/evaluate.py
 python ask.py "what can I do about a migraine"
-streamlit run app.py
 python -m pytest
+streamlit run app.py
 ```
+
+The `Set-ExecutionPolicy` line only affects this window and is needed if PowerShell refuses to run the activate script. Stop the app with Ctrl+C when you are done.
 
 Linux or macOS:
 
@@ -98,8 +101,8 @@ pip install -r requirements.txt
 python build_index.py
 python eval/evaluate.py
 python ask.py "what can I do about a migraine"
-streamlit run app.py
 python -m pytest
+streamlit run app.py
 ```
 
 On Linux, `pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu` first avoids downloading the much bigger GPU build.
